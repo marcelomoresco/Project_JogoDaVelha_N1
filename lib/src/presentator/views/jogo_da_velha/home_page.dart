@@ -15,53 +15,72 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(),
-          ),
-          Expanded(
-            flex: 3,
-            child: GridView.builder(
-                itemCount: 9,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      _tapped(index);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
-                      child: Center(
-                        child: Text(
-                          mostrarXouO[index],
-                          style: const TextStyle(
-                              color: Colors.black, fontSize: 40),
+      backgroundColor: Colors.deepPurple,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            const Text(
+              "Jogo da Velha",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 35),
+            ),
+            const Text("Marcelo Adriel Moresco",
+                style: TextStyle(color: Colors.white, fontSize: 18)),
+            const SizedBox(
+              height: 50,
+            ),
+            Expanded(
+              flex: 3,
+              child: GridView.builder(
+                  itemCount: 9,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          _tapped(index);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Center(
+                            child: Text(
+                              mostrarXouO[index],
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 70),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
-          ),
-          Expanded(
-            child: Container(),
-          ),
-        ],
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   void _tapped(int index) {
+    print(filledBox);
+    print(filledBox);
     setState(() {
       if (primeiraJogadaX && mostrarXouO[index] == '') {
         mostrarXouO[index] = 'X';
-        filledBox + 1;
+        filledBox += 1;
       } else if (!primeiraJogadaX && mostrarXouO[index] == '') {
         mostrarXouO[index] = 'O';
-        filledBox + 1;
+        filledBox += 1;
       }
       primeiraJogadaX = !primeiraJogadaX;
       _checkWinner();
@@ -75,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    filledBox == 0;
+    filledBox = 0;
   }
 
   void _checkWinner() {
@@ -133,14 +152,15 @@ class _HomePageState extends State<HomePage> {
         mostrarXouO[0] == mostrarXouO[8] &&
         mostrarXouO[0] != '') {
       _showWinDialog(mostrarXouO[0]);
-    } else if (filledBox == 9) {
+    }
+    print(filledBox);
+    if (filledBox == 9) {
       _showDrawDialog();
     }
   }
 
   void _showDrawDialog() {
     showDialog(
-        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -163,15 +183,15 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Venceuuuu!!!"),
+            title: const Text("Temos um Vencedor"),
             content: Text("O vencedor foi o " + winner),
             actions: [
-              TextButton(
+              ElevatedButton(
                   onPressed: () {
                     _clearBoard();
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Jogar Novamente!"))
+                  child: Text("Jogar Novamente"))
             ],
           );
         });
