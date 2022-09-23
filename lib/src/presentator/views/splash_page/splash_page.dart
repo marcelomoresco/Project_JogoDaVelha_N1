@@ -17,7 +17,7 @@ class SplashPage extends StatelessWidget {
           Column(
             children: const [
               Text(
-                "Tic Tac Toe",
+                "Jogo da velha",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,

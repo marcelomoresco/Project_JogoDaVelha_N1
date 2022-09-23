@@ -57,8 +57,11 @@ class _HomePageState extends State<HomePage> {
                           child: Center(
                             child: Text(
                               mostrarXouO[index],
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 70),
+                              style: TextStyle(
+                                  color: mostrarXouO[index] == 'X'
+                                      ? Colors.red
+                                      : Colors.green,
+                                  fontSize: 70),
                             ),
                           ),
                         ),
