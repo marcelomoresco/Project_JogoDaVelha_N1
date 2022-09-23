@@ -51,13 +51,14 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
+                              color: Colors.white,
                               border: Border.all(color: Colors.white),
                               borderRadius: BorderRadius.circular(15)),
                           child: Center(
                             child: Text(
                               mostrarXouO[index],
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 70),
+                                  color: Colors.black, fontSize: 70),
                             ),
                           ),
                         ),
@@ -167,6 +168,8 @@ class _HomePageState extends State<HomePage> {
             title: const Text("Empate"),
             actions: [
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple),
                   onPressed: () {
                     _clearBoard();
                     Navigator.of(context).pop();
@@ -187,6 +190,8 @@ class _HomePageState extends State<HomePage> {
             content: Text("O vencedor foi o " + winner),
             actions: [
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple),
                   onPressed: () {
                     _clearBoard();
                     Navigator.of(context).pop();
